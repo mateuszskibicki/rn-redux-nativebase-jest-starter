@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Provider as ReduxProvider } from "react-redux";
 
 import { StatusBar } from "react-native";
@@ -8,13 +8,20 @@ import * as Font from "expo-font";
 import { FontAwesome5 } from "@expo/vector-icons";
 import AppContainer from "./src/screens";
 
-//strone
+//store
 import configureStore from "./src/store/store";
 const reduxStore = configureStore();
 
-export default function App(): JSX.Element {
-  const [loading, setLoading] = useState<boolean>(true);
-  const loadAsyncAssets = async (): Promise<void> => {
+export default class App extends React.Component {
+  state = {
+    loading: true
+  };
+
+  setLoading = () => {
+    this.setState({ loading: !this.state.loading });
+  };
+
+  loadAsyncAssets = async (): Promise<void> => {
     try {
       await Promise.all([
         Font.loadAsync(FontAwesome5.font),
@@ -23,24 +30,26 @@ export default function App(): JSX.Element {
           Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
         })
       ]);
-      setLoading(false);
+      this.setLoading();
     } catch (err) {
-      setLoading(true);
+      this.setLoading();
     }
   };
 
-  useEffect((): void => {
-    loadAsyncAssets();
-  }, []);
+  componentDidMount() {
+    this.loadAsyncAssets();
+  }
 
-  if (loading) return <AppLoading />;
+  render() {
+    if (this.state.loading) return <AppLoading />;
 
-  return (
-    <ReduxProvider store={reduxStore}>
-      <Root>
-        <StatusBar hidden={true} />
-        <AppContainer />
-      </Root>
-    </ReduxProvider>
-  );
+    return (
+      <ReduxProvider store={reduxStore}>
+        <Root>
+          <StatusBar hidden={true} />
+          <AppContainer />
+        </Root>
+      </ReduxProvider>
+    );
+  }
 }
