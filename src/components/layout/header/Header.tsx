@@ -1,11 +1,17 @@
 import React from "react";
-import { Text, Header, Body, Right, Button, Icon } from "native-base";
+import { Title, Header, Body, Right, Button, Icon } from "native-base";
 
-const HeaderTop = (): JSX.Element => {
+interface IProps {
+  title: String;
+}
+
+const HeaderTop: React.FunctionComponent<IProps> = ({
+  title
+}: IProps): JSX.Element => {
   return (
     <Header>
       <Body>
-        <Text style={{ fontWeight: "700", color: "#f5f5f5" }}>Hejka</Text>
+        <Title>{title ? title : "NO HEADER NAME"}</Title>
       </Body>
       <Right>
         <Button rounded transparent onPress={(): void => console.log(1234)}>
