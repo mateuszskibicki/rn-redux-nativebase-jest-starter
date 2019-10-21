@@ -4,25 +4,30 @@ import MainLayout from "../components/layout/main/MainLayout";
 // import stylesMain from "../constants/stylesMain";
 // import { colors, shadows, font } from "../constants/stylesMain";
 
-const HomeScreen: any = ({ navigation }): JSX.Element => {
+const LoginScreen: any = ({ navigation }): JSX.Element => {
+  const onNavigate = () => {
+    navigation.navigate("Home");
+  };
+
   return (
     <MainLayout>
       <Content padder centerContent>
         <Card>
           <CardItem>
             <Body>
-              <Text>Home screen 123!</Text>
+              <Text>Login screenn</Text>
+              <Text>Login screenn</Text>
             </Body>
           </CardItem>
         </Card>
         <Button
           full
+          info
           rounded
-          dark
           style={{ marginTop: 10 }}
-          onPress={() => navigation.push("Second")}
+          onPress={onNavigate}
         >
-          <Text>Go to second</Text>
+          <Text>Login -> go home</Text>
         </Button>
       </Content>
     </MainLayout>
@@ -34,8 +39,10 @@ const HomeScreen: any = ({ navigation }): JSX.Element => {
 | Header options
 |--------------------------------------------------
 */
-HomeScreen.navigationOptions = {
-  title: "Home !"
+LoginScreen.navigationOptions = {
+  headerStyle: {
+    display: "none"
+  }
 };
 
-export default HomeScreen;
+export default LoginScreen;

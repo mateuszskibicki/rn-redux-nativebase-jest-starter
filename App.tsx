@@ -1,27 +1,56 @@
-import React from "react";
+/**
+|--------------------------------------------------
+| React and Redux imports
+|--------------------------------------------------
+*/
+import React, { useState, useEffect } from "react";
 import { Provider as ReduxProvider } from "react-redux";
 
+/**
+|--------------------------------------------------
+| All expo/native-base imports
+|--------------------------------------------------
+*/
+import { AppLoading } from "expo";
 import { StatusBar } from "react-native";
 import { Root } from "native-base";
-import { AppLoading } from "expo";
 import * as Font from "expo-font";
 import { FontAwesome5 } from "@expo/vector-icons";
-import AppContainer from "./src/screens";
 
-//store
+/**
+|--------------------------------------------------
+| Faster screens
+|--------------------------------------------------
+*/
+import { useScreens } from "react-native-screens";
+useScreens();
+
+/**
+|--------------------------------------------------
+| App container -> react-navigation
+|--------------------------------------------------
+*/
+import AppNavigator from "./src/components/navigator/AppNavigator";
+
+/**
+|--------------------------------------------------
+| Redux store
+|--------------------------------------------------
+*/
 import configureStore from "./src/store/store";
 const reduxStore = configureStore();
 
-export default class App extends React.Component {
-  state = {
-    loading: true
-  };
+/**
+|--------------------------------------------------
+| Component and logic
+|--------------------------------------------------
+*/
+const App: React.FunctionComponent<any> = (): JSX.Element => {
+  // loading
+  const [loading, setLoading] = useState<boolean>(true);
 
-  setLoading = () => {
-    this.setState({ loading: !this.state.loading });
-  };
-
-  loadAsyncAssets = async (): Promise<void> => {
+  // async await grab assets
+  const loadAsyncAssets = async (): Promise<void> => {
     try {
       await Promise.all([
         Font.loadAsync(FontAwesome5.font),
@@ -30,26 +59,30 @@ export default class App extends React.Component {
           Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
         })
       ]);
-      this.setLoading();
+      setLoading(false);
     } catch (err) {
-      this.setLoading();
+      //setError('Something went wrong') TODO
+      setLoading(false);
     }
   };
 
-  componentDidMount() {
-    this.loadAsyncAssets();
-  }
+  // grab assets on start
+  useEffect((): void => {
+    loadAsyncAssets();
+  }, []);
 
-  render() {
-    if (this.state.loading) return <AppLoading />;
+  // if loading -> app loading component
+  if (loading) return <AppLoading />;
 
-    return (
-      <ReduxProvider store={reduxStore}>
-        <Root>
-          <StatusBar hidden={true} />
-          <AppContainer />
-        </Root>
-      </ReduxProvider>
-    );
-  }
-}
+  // return main component
+  return (
+    <ReduxProvider store={reduxStore}>
+      <Root>
+        <StatusBar hidden={true} />
+        <AppNavigator />
+      </Root>
+    </ReduxProvider>
+  );
+};
+
+export default App;

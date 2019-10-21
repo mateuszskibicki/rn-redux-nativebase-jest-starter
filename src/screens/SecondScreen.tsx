@@ -2,11 +2,9 @@ import React from "react";
 import { Button, Body, Content, Text, Card, CardItem } from "native-base";
 import MainLayout from "../components/layout/main/MainLayout";
 
-const SecondScreen: React.FunctionComponent<any> = ({
-  navigation
-}): JSX.Element => {
+const SecondScreen: any = ({ navigation }): JSX.Element => {
   return (
-    <MainLayout headerTitle={"SecondScreen"}>
+    <MainLayout>
       <Content padder>
         <Card>
           <CardItem>
@@ -19,13 +17,22 @@ const SecondScreen: React.FunctionComponent<any> = ({
           full
           rounded
           style={{ marginTop: 10 }}
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.push("Home")}
         >
           <Text>Go to home</Text>
         </Button>
       </Content>
     </MainLayout>
   );
+};
+
+/**
+|--------------------------------------------------
+| Header options
+|--------------------------------------------------
+*/
+SecondScreen.navigationOptions = {
+  title: "Second !"
 };
 
 export default SecondScreen;

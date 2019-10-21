@@ -1,24 +1,15 @@
 import React from "react";
 import { Container } from "native-base";
-import Header from "../header/Header";
-import Footer from "../footer/Footer";
 
 interface IProps {
-  headerTitle: String;
   children: any;
 }
 
 const MainLayout: React.FunctionComponent<IProps> = ({
-  headerTitle,
+  // headerTitle,
   children
 }: IProps): JSX.Element => {
-  return (
-    <Container>
-      <Header title={headerTitle} />
-      {children && children}
-      <Footer />
-    </Container>
-  );
+  return <Container>{children && children}</Container>;
 };
 
 export default MainLayout;
