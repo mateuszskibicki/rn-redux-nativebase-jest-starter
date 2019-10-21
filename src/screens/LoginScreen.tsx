@@ -2,10 +2,18 @@ import React from "react";
 import { AsyncStorage } from "react-native";
 import { Button, Body, Content, Text, Card, CardItem } from "native-base";
 import MainLayout from "../components/layout/main/MainLayout";
-// import stylesMain from "../constants/stylesMain";
-// import { colors, shadows, font } from "../constants/stylesMain";
 
-const LoginScreen: any = ({ navigation }): JSX.Element => {
+export interface IProps {
+  navigation: any;
+}
+
+export interface NavFunctionComponent extends React.FunctionComponent<IProps> {
+  navigationOptions?: Object;
+}
+
+const LoginScreen: NavFunctionComponent = ({
+  navigation
+}: IProps): JSX.Element => {
   const onLogin = async (): Promise<any> => {
     await AsyncStorage.setItem("token", "abc");
     navigation.navigate("Home");

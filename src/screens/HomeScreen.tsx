@@ -2,7 +2,17 @@ import React from "react";
 import { Button, Body, Content, Text, Card, CardItem, Icon } from "native-base";
 import MainLayout from "../components/layout/main/MainLayout";
 
-const HomeScreen: any = ({ navigation }): JSX.Element => {
+export interface IProps {
+  navigation: any;
+}
+
+export interface NavFunctionComponent extends React.FunctionComponent<IProps> {
+  navigationOptions?: Object;
+}
+
+const HomeScreen: NavFunctionComponent = ({
+  navigation
+}: IProps): JSX.Element => {
   return (
     <MainLayout>
       <Content padder centerContent>

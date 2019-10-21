@@ -26,7 +26,7 @@ export interface NavFunctionComponent extends React.FunctionComponent<IProps> {
 }
 
 const SettingsScreen: NavFunctionComponent = ({
-  navigation,
+  // navigation,
   loading,
   setLoadingStart,
   setLoadingStop
