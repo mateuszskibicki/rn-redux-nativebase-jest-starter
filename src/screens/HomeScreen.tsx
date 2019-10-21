@@ -2,14 +2,14 @@ import React from "react";
 import { Button, Body, Content, Text, Card, CardItem, Icon } from "native-base";
 import MainLayout from "../components/layout/main/MainLayout";
 
-const HomeScreen: any = ({ navigation }: any): JSX.Element => {
+const HomeScreen: any = ({ navigation }): JSX.Element => {
   return (
     <MainLayout>
       <Content padder centerContent>
         <Card>
           <CardItem>
             <Body>
-              <Text>Home screen 123!</Text>
+              <Text>Home screen!!</Text>
             </Body>
           </CardItem>
         </Card>

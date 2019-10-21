@@ -6,20 +6,15 @@
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
-
-/**
-|--------------------------------------------------
-| screens
-|--------------------------------------------------
-*/
+// screens
 import Screens from "../screens";
 
-// loading stack
+// loading stack -> decide where to go -> AuthStack or HomeStack
 const AuthLoadingStack = createStackNavigator({
   Loading: Screens.AuthLoadingScreen
 });
 
-// logout stack
+// logout stack -> remove token and navigate to AuthStack
 const AuthLogoutStack = createStackNavigator({
   Logout: Screens.LogoutScreen
 });
@@ -28,8 +23,6 @@ const AuthLogoutStack = createStackNavigator({
 const AuthStack = createStackNavigator({
   Login: Screens.LoginScreen
 });
-
-// TODO LogoutScreen / AuthLoadingStack and Screen
 
 // app stack -> the rest here
 const HomeStack = createStackNavigator({

@@ -1,8 +1,36 @@
 import React from "react";
-import { Button, Body, Content, Text, Card, CardItem } from "native-base";
+import { connect } from "react-redux";
+import {
+  Button,
+  Body,
+  Content,
+  Text,
+  Card,
+  CardItem,
+  Grid,
+  Col
+} from "native-base";
 import MainLayout from "../components/layout/main/MainLayout";
 
-const SettingsScreen: any = ({ navigation }): JSX.Element => {
+import { setLoadingStart, setLoadingStop } from "../store/actions/loading";
+
+export interface IProps {
+  navigation: any;
+  loading: { loading: boolean };
+  setLoadingStart: typeof setLoadingStart;
+  setLoadingStop: typeof setLoadingStop;
+}
+
+export interface NavFunctionComponent extends React.FunctionComponent<IProps> {
+  navigationOptions?: Object;
+}
+
+const SettingsScreen: NavFunctionComponent = ({
+  navigation,
+  loading,
+  setLoadingStart,
+  setLoadingStop
+}: IProps): JSX.Element => {
   return (
     <MainLayout>
       <Content padder centerContent>
@@ -13,14 +41,23 @@ const SettingsScreen: any = ({ navigation }): JSX.Element => {
             </Body>
           </CardItem>
         </Card>
-        <Button
-          full
-          rounded
-          style={{ marginTop: 10 }}
-          onPress={() => navigation.navigate("Home")}
-        >
-          <Text>Go to home</Text>
-        </Button>
+        <Grid>
+          <Col>
+            <Button full rounded onPress={() => setLoadingStart()}>
+              <Text>Set loading true</Text>
+            </Button>
+          </Col>
+          <Col>
+            <Button full rounded onPress={() => setLoadingStop()}>
+              <Text>Set loading false</Text>
+            </Button>
+          </Col>
+        </Grid>
+        <Grid>
+          <Col>
+            <Text>{loading.loading ? "True" : "False"}</Text>
+          </Col>
+        </Grid>
       </Content>
     </MainLayout>
   );
@@ -35,4 +72,10 @@ SettingsScreen.navigationOptions = {
   title: "Settings !"
 };
 
-export default SettingsScreen;
+const mapStateToProps = ({ loading }) => ({ loading });
+const mapDispatchToProps = { setLoadingStart, setLoadingStop };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SettingsScreen);
