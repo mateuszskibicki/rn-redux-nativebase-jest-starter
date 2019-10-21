@@ -3,7 +3,6 @@
 | Main imports
 |--------------------------------------------------
 */
-import React from "react";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
@@ -13,7 +12,7 @@ import { createMaterialBottomTabNavigator } from "react-navigation-material-bott
 | screens
 |--------------------------------------------------
 */
-import Screens from "../../screens";
+import Screens from "../screens";
 
 const LoginStack = createStackNavigator({
   Login: Screens.LoginScreen
@@ -24,9 +23,14 @@ const HomeStack = createStackNavigator({
   Second: Screens.SecondScreen
 });
 
-const bottomMainStack = createMaterialBottomTabNavigator(
+const SettingsStack = createStackNavigator({
+  Settings: Screens.SettingsScreen
+});
+
+const HomeStackBottomNav = createMaterialBottomTabNavigator(
   {
-    HomeStack
+    HomeStack,
+    SettingsStack
   },
   {
     initialRouteName: "HomeStack",
@@ -40,7 +44,7 @@ export default createAppContainer(
   createSwitchNavigator(
     {
       Login: LoginStack,
-      Homne: bottomMainStack
+      Homne: HomeStackBottomNav
     },
     {
       initialRouteName: "Login"

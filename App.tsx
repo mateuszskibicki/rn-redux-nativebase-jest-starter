@@ -30,7 +30,7 @@ useScreens();
 | App container -> react-navigation
 |--------------------------------------------------
 */
-import AppNavigator from "./src/components/navigator/AppNavigator";
+import AppNavigator from "./src/navigator/AppNavigator";
 
 /**
 |--------------------------------------------------
