@@ -1,11 +1,13 @@
 import React from "react";
+import { AsyncStorage } from "react-native";
 import { Button, Body, Content, Text, Card, CardItem } from "native-base";
 import MainLayout from "../components/layout/main/MainLayout";
 // import stylesMain from "../constants/stylesMain";
 // import { colors, shadows, font } from "../constants/stylesMain";
 
 const LoginScreen: any = ({ navigation }): JSX.Element => {
-  const onNavigate = () => {
+  const onLogin = async (): Promise<any> => {
+    await AsyncStorage.setItem("token", "abc");
     navigation.navigate("Home");
   };
 
@@ -20,14 +22,8 @@ const LoginScreen: any = ({ navigation }): JSX.Element => {
             </Body>
           </CardItem>
         </Card>
-        <Button
-          full
-          info
-          rounded
-          style={{ marginTop: 10 }}
-          onPress={onNavigate}
-        >
-          <Text>Login -> go home</Text>
+        <Button full info rounded style={{ marginTop: 10 }} onPress={onLogin}>
+          <Text>Login</Text>
         </Button>
       </Content>
     </MainLayout>

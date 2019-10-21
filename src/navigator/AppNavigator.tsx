@@ -14,10 +14,24 @@ import { createMaterialBottomTabNavigator } from "react-navigation-material-bott
 */
 import Screens from "../screens";
 
-const LoginStack = createStackNavigator({
+// loading stack
+const AuthLoadingStack = createStackNavigator({
+  Loading: Screens.AuthLoadingScreen
+});
+
+// logout stack
+const AuthLogoutStack = createStackNavigator({
+  Logout: Screens.LogoutScreen
+});
+
+// auth stack -> login/logout and register
+const AuthStack = createStackNavigator({
   Login: Screens.LoginScreen
 });
 
+// TODO LogoutScreen / AuthLoadingStack and Screen
+
+// app stack -> the rest here
 const HomeStack = createStackNavigator({
   Home: Screens.HomeScreen,
   Second: Screens.SecondScreen
@@ -43,11 +57,13 @@ const HomeStackBottomNav = createMaterialBottomTabNavigator(
 export default createAppContainer(
   createSwitchNavigator(
     {
-      Login: LoginStack,
-      Homne: HomeStackBottomNav
+      AuthLoading: AuthLoadingStack,
+      AuthLogout: AuthLogoutStack,
+      Auth: AuthStack,
+      Home: HomeStackBottomNav
     },
     {
-      initialRouteName: "Login"
+      initialRouteName: "AuthLoading"
     }
   )
 );

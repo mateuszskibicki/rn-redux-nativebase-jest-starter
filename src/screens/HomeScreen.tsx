@@ -1,10 +1,8 @@
 import React from "react";
-import { Button, Body, Content, Text, Card, CardItem } from "native-base";
+import { Button, Body, Content, Text, Card, CardItem, Icon } from "native-base";
 import MainLayout from "../components/layout/main/MainLayout";
-// import stylesMain from "../constants/stylesMain";
-// import { colors, shadows, font } from "../constants/stylesMain";
 
-const HomeScreen: any = ({ navigation }): JSX.Element => {
+const HomeScreen: any = ({ navigation }: any): JSX.Element => {
   return (
     <MainLayout>
       <Content padder centerContent>
@@ -34,8 +32,19 @@ const HomeScreen: any = ({ navigation }): JSX.Element => {
 | Header options
 |--------------------------------------------------
 */
-HomeScreen.navigationOptions = {
-  title: "Home !"
+HomeScreen.navigationOptions = ({ navigation }) => {
+  return {
+    title: "Home !",
+    headerRight: () => (
+      <Icon
+        type="MaterialCommunityIcons"
+        name="logout"
+        onPress={() => {
+          navigation.navigate("AuthLogout");
+        }}
+      />
+    )
+  };
 };
 
 export default HomeScreen;
