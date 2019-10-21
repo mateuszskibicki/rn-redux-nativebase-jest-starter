@@ -72,8 +72,8 @@ SettingsScreen.navigationOptions = {
   title: "Settings !"
 };
 
-const mapStateToProps = ({ loading }) => ({ loading });
-const mapDispatchToProps = { setLoadingStart, setLoadingStop };
+const mapStateToProps = ({ loading }): Object => ({ loading });
+const mapDispatchToProps: Object = { setLoadingStart, setLoadingStop };
 
 export default connect(
   mapStateToProps,

@@ -17,7 +17,7 @@ const SecondScreen: any = ({ navigation }): JSX.Element => {
           full
           rounded
           style={{ marginTop: 10 }}
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.popToTop()}
         >
           <Text>Go to home</Text>
         </Button>

@@ -38,7 +38,7 @@ import AppNavigator from "./src/navigator/AppNavigator";
 |--------------------------------------------------
 */
 import configureStore from "./src/store/store";
-const reduxStore = configureStore();
+const reduxStore = configureStore({});
 
 /**
 |--------------------------------------------------
